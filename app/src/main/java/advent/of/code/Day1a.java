@@ -5,13 +5,24 @@ import java.util.stream.Stream;
 
 public class Day1a {
 
-    double calculateDistanceBetweenLists(Stream<String> puzzleInput) {
-        List<String[]> fred = puzzleInput
+    double calculateDistanceBetweenLists(Stream<String> puzzleInputStream) {
+        List<String> puzzleInput = puzzleInputStream.toList();
+        List<Double> list1 = puzzleInput.stream()
             .map(line -> line.trim().split("\\s+"))
+            .map(pairArray -> Double.parseDouble(pairArray[0]))
             .toList();
 
-        System.out.println(fred.get(0)[0]);
-        System.out.println(fred.get(0)[1]);
-        return Math.abs(Double.parseDouble(fred.get(0)[1]) - Double.parseDouble(fred.get(0)[0]));
+        List<Double> list2 = puzzleInput.stream()
+            .map(line -> line.trim().split("\\s+"))
+            .map(pairArray -> Double.parseDouble(pairArray[1]))
+            .toList();
+
+
+        int numberOfRows = list1.size();
+        int totalDistance = 0;
+        for (int i = 0; i < numberOfRows; i++) {
+            totalDistance += Math.abs(list1.get(i) - list2.get(i));
+        }            
+        return totalDistance;
     }
 }

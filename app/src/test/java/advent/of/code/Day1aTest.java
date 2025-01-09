@@ -34,6 +34,14 @@ public class Day1aTest {
     }
 
     @Test
+    public void listsContains2Rows() throws IOException {
+
+        Day1a day1a = new Day1a();
+
+        Stream<String> puzzleInput = List.of("3    1", "20    25").stream();
+        assertEquals(7, day1a.calculateDistanceBetweenLists(puzzleInput));
+    }
+
     public void examplePuzzleInput() throws IOException {
 
         Day1a day1a = new Day1a();
