@@ -16,7 +16,7 @@ public class Day1aTest {
 
 
     @Test
-    public void listsContains1RowWithSecondItemHighest() throws IOException {
+    public void listsContains1RowWithSecondListHighest() throws IOException {
 
         Day1a day1a = new Day1a();
 
@@ -25,7 +25,7 @@ public class Day1aTest {
     }
 
     @Test
-    public void listsContains1RowWithFirstItemHighest() throws IOException {
+    public void listsContains1RowWithFirstListHighest() throws IOException {
 
         Day1a day1a = new Day1a();
 
