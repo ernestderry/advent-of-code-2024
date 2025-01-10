@@ -3,12 +3,29 @@
  */
 package advent.of.code;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Stream;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws Exception {
+
+        Day1a day1a = new Day1a();
+
+        try (InputStream inputStream = App.class.getClassLoader().getResourceAsStream("day1a.txt")) { 
+            if (inputStream == null) {
+                throw new FileNotFoundException("Resource file not found!");
+            }
+
+            Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
+
+            System.out.println("Day1a : " + day1a.calculateDistanceBetweenLists(puzzleInput));
+        } 
     }
 }

@@ -56,7 +56,7 @@ public class Day1aTest {
 
         Day1a day1a = new Day1a();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("day1a.txt")) { 
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("day1a_example.txt")) { 
             if (inputStream == null) {
                 throw new FileNotFoundException("Resource file not found!");
             }
@@ -64,6 +64,22 @@ public class Day1aTest {
             Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
 
             assertEquals(11, day1a.calculateDistanceBetweenLists(puzzleInput));
+        } 
+    }
+
+    @Test
+    public void actualPuzzleInput() throws IOException {
+
+        Day1a day1a = new Day1a();
+
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("day1a.txt")) { 
+            if (inputStream == null) {
+                throw new FileNotFoundException("Resource file not found!");
+            }
+
+            Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
+
+            assertEquals(765748, day1a.calculateDistanceBetweenLists(puzzleInput));
         } 
     }
 }
