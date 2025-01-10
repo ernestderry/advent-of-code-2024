@@ -10,11 +10,13 @@ public class Day1a {
         List<Double> list1 = puzzleInput.stream()
             .map(line -> line.trim().split("\\s+"))
             .map(pairArray -> Double.parseDouble(pairArray[0]))
+            .sorted()
             .toList();
 
         List<Double> list2 = puzzleInput.stream()
             .map(line -> line.trim().split("\\s+"))
             .map(pairArray -> Double.parseDouble(pairArray[1]))
+            .sorted()
             .toList();
 
 

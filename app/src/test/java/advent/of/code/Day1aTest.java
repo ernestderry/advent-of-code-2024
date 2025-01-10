@@ -42,6 +42,16 @@ public class Day1aTest {
         assertEquals(7, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
+    @Test
+    public void listsContains2RowsNotSorted() throws IOException {
+
+        Day1a day1a = new Day1a();
+
+        Stream<String> puzzleInput = List.of("10    5", "7    20").stream();
+        assertEquals(12, day1a.calculateDistanceBetweenLists(puzzleInput));
+    }
+
+    @Test
     public void examplePuzzleInput() throws IOException {
 
         Day1a day1a = new Day1a();
