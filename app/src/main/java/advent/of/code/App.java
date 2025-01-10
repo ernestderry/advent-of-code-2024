@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.stream.Stream;
+import java.util.List;
 
 public class App {
 
@@ -20,7 +20,7 @@ public class App {
                 throw new FileNotFoundException("Resource file not found!");
             }
 
-            Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
+            List<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines().toList(); 
 
             System.out.println("Day1a : " + day1a.calculateDistanceBetweenLists(puzzleInput));
         } 

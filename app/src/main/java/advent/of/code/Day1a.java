@@ -1,12 +1,10 @@
 package advent.of.code;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Day1a {
 
-    double calculateDistanceBetweenLists(Stream<String> puzzleInputStream) {
-        List<String> puzzleInput = puzzleInputStream.toList();
+    double calculateDistanceBetweenLists(List<String> puzzleInput) {
         List<Double> list1 = puzzleInput.stream()
             .map(line -> line.trim().split("\\s+"))
             .map(pairArray -> Double.parseDouble(pairArray[0]))
@@ -18,7 +16,6 @@ public class Day1a {
             .map(pairArray -> Double.parseDouble(pairArray[1]))
             .sorted()
             .toList();
-
 
         int numberOfRows = list1.size();
         int totalDistance = 0;

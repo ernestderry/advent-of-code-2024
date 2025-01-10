@@ -8,78 +8,62 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class Day1aTest {
 
+    Day1a day1a;
+
+    @BeforeEach
+    public void setup() {
+        day1a = new Day1a();
+    }
 
     @Test
     public void listsContains1RowWithSecondListHighest() throws IOException {
-
-        Day1a day1a = new Day1a();
-
-        Stream<String> puzzleInput = List.of("1    3").stream();
+        List<String> puzzleInput = List.of("1    3");
         assertEquals(2, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
     @Test
     public void listsContains1RowWithFirstListHighest() throws IOException {
-
-        Day1a day1a = new Day1a();
-
-        Stream<String> puzzleInput = List.of("3    1").stream();
+        List<String> puzzleInput = List.of("3    1");
         assertEquals(2, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
     @Test
     public void listsContains2Rows() throws IOException {
-
-        Day1a day1a = new Day1a();
-
-        Stream<String> puzzleInput = List.of("3    1", "20    25").stream();
+        List<String> puzzleInput = List.of("3    1", "20    25");
         assertEquals(7, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
     @Test
     public void listsContains2RowsNotSorted() throws IOException {
-
-        Day1a day1a = new Day1a();
-
-        Stream<String> puzzleInput = List.of("10    5", "7    20").stream();
+        List<String> puzzleInput = List.of("10    5", "7    20");
         assertEquals(12, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
     @Test
     public void examplePuzzleInput() throws IOException {
 
-        Day1a day1a = new Day1a();
-
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("day1a_example.txt")) { 
-            if (inputStream == null) {
-                throw new FileNotFoundException("Resource file not found!");
-            }
-
-            Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
-
-            assertEquals(11, day1a.calculateDistanceBetweenLists(puzzleInput));
-        } 
+        List<String> puzzleInput = readPuzzleInputFromFile("day1a_example.txt"); 
+        assertEquals(11, day1a.calculateDistanceBetweenLists(puzzleInput));
     }
 
     @Test
     public void actualPuzzleInput() throws IOException {
+        List<String> puzzleInput = readPuzzleInputFromFile("day1a.txt"); 
+        assertEquals(765748, day1a.calculateDistanceBetweenLists(puzzleInput));
+    }
 
-        Day1a day1a = new Day1a();
-
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("day1a.txt")) { 
+    private List<String> readPuzzleInputFromFile(String filename) throws FileNotFoundException, IOException {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)) { 
             if (inputStream == null) {
                 throw new FileNotFoundException("Resource file not found!");
             }
-
-            Stream<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines(); 
-
-            assertEquals(765748, day1a.calculateDistanceBetweenLists(puzzleInput));
-        } 
+            return new BufferedReader(new InputStreamReader(inputStream)).lines().toList(); 
+        }
     }
 }
