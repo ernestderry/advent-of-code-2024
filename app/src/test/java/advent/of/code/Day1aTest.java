@@ -24,38 +24,38 @@ public class Day1aTest {
     @Test
     public void listsContains1RowWithSecondListHighest() throws IOException {
         List<String> puzzleInput = List.of("1    3");
-        assertEquals(2, day1a.calculateDistanceBetweenLists(puzzleInput));
+        assertEquals("2", day1a.solve(puzzleInput));
     }
 
     @Test
     public void listsContains1RowWithFirstListHighest() throws IOException {
         List<String> puzzleInput = List.of("3    1");
-        assertEquals(2, day1a.calculateDistanceBetweenLists(puzzleInput));
+        assertEquals("2", day1a.solve(puzzleInput));
     }
 
     @Test
     public void listsContains2Rows() throws IOException {
         List<String> puzzleInput = List.of("3    1", "20    25");
-        assertEquals(7, day1a.calculateDistanceBetweenLists(puzzleInput));
+        assertEquals("7", day1a.solve(puzzleInput));
     }
 
     @Test
     public void listsContains2RowsNotSorted() throws IOException {
         List<String> puzzleInput = List.of("10    5", "7    20");
-        assertEquals(12, day1a.calculateDistanceBetweenLists(puzzleInput));
+        assertEquals("12", day1a.solve(puzzleInput));
     }
 
     @Test
     public void examplePuzzleInput() throws IOException {
 
-        List<String> puzzleInput = readPuzzleInputFromFile("day1a_example.txt"); 
-        assertEquals(11, day1a.calculateDistanceBetweenLists(puzzleInput));
+        List<String> puzzleInput = readPuzzleInputFromFile("day1_example.txt"); 
+        assertEquals("11", day1a.solve(puzzleInput));
     }
 
     @Test
     public void actualPuzzleInput() throws IOException {
-        List<String> puzzleInput = readPuzzleInputFromFile("day1a.txt"); 
-        assertEquals(765748, day1a.calculateDistanceBetweenLists(puzzleInput));
+        List<String> puzzleInput = readPuzzleInputFromFile("day1.txt"); 
+        assertEquals("765748", day1a.solve(puzzleInput));
     }
 
     private List<String> readPuzzleInputFromFile(String filename) throws FileNotFoundException, IOException {

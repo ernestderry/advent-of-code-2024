@@ -24,38 +24,38 @@ public class Day1bTest {
     @Test
     public void itemInFirstListNotInSecondList() {
         List<String> puzzleInput = List.of("1    3");
-        assertEquals(0, day1b.calculateSimilarity(puzzleInput));
+        assertEquals("0", day1b.solve(puzzleInput));
     }
     
     @Test
     public void itemInFirstListIsInSecondList() {
         List<String> puzzleInput = List.of("3    3");
-        assertEquals(3, day1b.calculateSimilarity(puzzleInput));
+        assertEquals("3", day1b.solve(puzzleInput));
     }
 
     @Test
     public void itemInFirstListIsInSecondListMoreThanOnce() {
         List<String> puzzleInput = List.of("3    3", "1    3");
-        assertEquals(6, day1b.calculateSimilarity(puzzleInput));
+        assertEquals("6", day1b.solve(puzzleInput));
     }
 
     @Test
     public void sumsAllLineScoresFromFirstListAgainstCountsInSecondList() {
         List<String> puzzleInput = List.of("3    3", "2    3", "1    2");
-        assertEquals(8, day1b.calculateSimilarity(puzzleInput));
+        assertEquals("8", day1b.solve(puzzleInput));
     }
 
     @Test
     public void examplePuzzleInput() throws IOException {
 
-        List<String> puzzleInput = readPuzzleInputFromFile("day1a_example.txt"); 
-        assertEquals(31, day1b.calculateSimilarity(puzzleInput));
+        List<String> puzzleInput = readPuzzleInputFromFile("day1_example.txt"); 
+        assertEquals("31", day1b.solve(puzzleInput));
     }
 
     @Test
     public void actualPuzzleInput() throws IOException {
-        List<String> puzzleInput = readPuzzleInputFromFile("day1a.txt"); 
-        assertEquals(27732508, day1b.calculateSimilarity(puzzleInput));
+        List<String> puzzleInput = readPuzzleInputFromFile("day1.txt"); 
+        assertEquals("27732508", day1b.solve(puzzleInput));
     }
 
     private List<String> readPuzzleInputFromFile(String filename) throws FileNotFoundException, IOException {

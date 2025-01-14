@@ -3,12 +3,6 @@
  */
 package advent.of.code;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
-
 public class App {
 
     public static void main(String[] args) throws Exception {
@@ -16,24 +10,7 @@ public class App {
         Day1a day1a = new Day1a();
         Day1b day1b = new Day1b();
 
-        try (InputStream inputStream = App.class.getClassLoader().getResourceAsStream("day1a.txt")) { 
-            if (inputStream == null) {
-                throw new FileNotFoundException("Resource file not found!");
-            }
-
-            List<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines().toList(); 
-
-            System.out.println("Day1a : " + day1a.calculateDistanceBetweenLists(puzzleInput));
-        } 
-
-        try (InputStream inputStream = App.class.getClassLoader().getResourceAsStream("day1a.txt")) { 
-            if (inputStream == null) {
-                throw new FileNotFoundException("Resource file not found!");
-            }
-
-            List<String> puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines().toList(); 
-
-            System.out.println("Day1b : " + day1b.calculateSimilarity(puzzleInput));
-        }
+        day1a.solve();
+        day1b.solve();
     }
 }

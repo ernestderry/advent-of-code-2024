@@ -5,9 +5,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Day1b {
+public class Day1b extends Solution {
 
-    public long calculateSimilarity(List<String> puzzleInput) {
+    Day1b() {
+        super.day = 1;
+        super.title = "Day 1b";
+    }
+
+    public String solve(List<String> puzzleInput) {
 
         List<Long> list1 = puzzleInput.stream()
             .map(line -> line.trim().split("\\s+"))
@@ -20,8 +25,8 @@ public class Day1b {
             .map(pairArray -> Long.parseLong(pairArray[1]))
             .collect(Collectors.groupingBy(id -> id, Collectors.counting()));
 
-        return list1.stream()
+        return Long.toString(list1.stream()
             .mapToLong(id -> id * Optional.ofNullable(list2EntryCounts.get(id)).orElse(0L))
-            .sum();            
+            .sum());            
     }
 }
