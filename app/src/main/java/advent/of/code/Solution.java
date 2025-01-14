@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public abstract class Solution {
-    String title;
     int day;
+    String part;
 
     List<String> getPuzzleInput() throws IOException {
         String filename = "day" + day + ".txt";
@@ -22,6 +22,10 @@ public abstract class Solution {
             puzzleInput = new BufferedReader(new InputStreamReader(inputStream)).lines().toList(); 
         } 
         return puzzleInput;
+    }
+
+    String getTitle() {
+        return "Day" + day + part;
     }
 
     String solve() throws IOException {

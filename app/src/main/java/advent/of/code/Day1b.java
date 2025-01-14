@@ -9,7 +9,7 @@ public class Day1b extends Solution {
 
     Day1b() {
         super.day = 1;
-        super.title = "Day 1b";
+        super.part = "b";
     }
 
     public String solve(List<String> puzzleInput) {

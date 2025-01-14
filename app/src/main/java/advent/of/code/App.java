@@ -6,11 +6,11 @@ package advent.of.code;
 public class App {
 
     public static void main(String[] args) throws Exception {
+        solve(new Day1a());
+        solve(new Day1b());
+    }
 
-        Day1a day1a = new Day1a();
-        Day1b day1b = new Day1b();
-
-        day1a.solve();
-        day1b.solve();
+    public static void solve(Solution solution) throws Exception {
+        System.out.println(solution.getTitle() + " : " + solution.solve());
     }
 }
