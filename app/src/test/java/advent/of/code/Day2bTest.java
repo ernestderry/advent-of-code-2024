@@ -36,6 +36,7 @@ public class Day2bTest {
         assertEquals("0", day2b.solve(List.of("1 3 2 4 5")));
     }
 
+    @Test
     public void rowWithOnlyOneUnSafeDescendingLevelIsSafe() {
         assertEquals("1", day2b.solve(List.of("8 6 4 4 1")));
     }
@@ -49,7 +50,6 @@ public class Day2bTest {
         assertEquals("0", day2b.solve(List.of("9 7 6 2 1")));
     }
 
-    @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2_example.txt"); 
         assertEquals("2", day2b.solve(puzzleInput));

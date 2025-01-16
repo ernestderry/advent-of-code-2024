@@ -25,12 +25,12 @@ public class Day2b extends Solution {
     private boolean isReportSafe(String report) {
         List<Integer> levels = Arrays.stream(report.split("\\s"))
                 .map(n -> Integer.parseInt(n))
-                .toList();
+                .collect(Collectors.toList());
 
         boolean levelsDescendSafely;
         OptionalInt firstFailingLevel = findFirstFailingDescendingLevel(levels);
         if (firstFailingLevel.isPresent()) {
-            // levels.remove(firstFailingLevel.getAsInt());
+            levels.remove(firstFailingLevel.getAsInt());
             firstFailingLevel = findFirstFailingDescendingLevel(levels);
         }
         levelsDescendSafely = !firstFailingLevel.isPresent();
