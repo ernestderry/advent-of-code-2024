@@ -51,15 +51,17 @@ public class Day2aTest {
         assertEquals("0", day2a.solve(List.of("9 7 6 2 1")));
     }
 
+    @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2_example.txt"); 
         assertEquals("2", day2a.solve(puzzleInput));
     }
 
-    // public void actualPuzzleInput() throws IOException {
-    //     List<String> puzzleInput = readPuzzleInputFromFile("day2.txt"); 
-    //     assertEquals("", day2a.solve(puzzleInput));
-    // }
+    @Test
+    public void actualPuzzleInput() throws IOException {
+        List<String> puzzleInput = readPuzzleInputFromFile("day2.txt"); 
+        assertEquals("306", day2a.solve(puzzleInput));
+    }
 
     private List<String> readPuzzleInputFromFile(String filename) throws FileNotFoundException, IOException {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)) { 
