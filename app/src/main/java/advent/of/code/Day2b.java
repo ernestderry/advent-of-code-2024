@@ -2,6 +2,7 @@ package advent.of.code;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,13 +27,24 @@ public class Day2b extends Solution {
                 .map(n -> Integer.parseInt(n))
                 .toList();
 
-        boolean levelsDescendSafely = IntStream.range(0, levels.size() - 1)
-                .allMatch(n -> levelDescendsSafely(levels, n));
+        boolean levelsDescendSafely;
+        OptionalInt firstFailingLevel = findFirstFailingDescendingLevel(levels);
+        if (firstFailingLevel.isPresent()) {
+            // levels.remove(firstFailingLevel.getAsInt());
+            firstFailingLevel = findFirstFailingDescendingLevel(levels);
+        }
+        levelsDescendSafely = !firstFailingLevel.isPresent();
 
         boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
                 .allMatch(n -> levelAscendsSafely(levels, n));
 
         return levelAscendsSafely || levelsDescendSafely;
+    }
+
+    private OptionalInt findFirstFailingDescendingLevel(List<Integer> levels) {
+        return IntStream.range(0, levels.size() - 1)
+                .filter(n -> !levelDescendsSafely(levels, n))
+                .findFirst();
     }
 
     boolean levelAscendsSafely(List<Integer> levels, int n) {
