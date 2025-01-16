@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 
 public class Day2a extends Solution {
 
+    private static final int LEVEL_TOLERANCE = 3;
+
     Day2a() {
         super.day = 2;
         super.part = "a";
@@ -24,14 +26,26 @@ public class Day2a extends Solution {
                 .map(n -> Integer.parseInt(n))
                 .toList();
 
-        boolean descending = IntStream.range(0, levels.size() - 1)
-                .allMatch(n -> levels.get(n) > levels.get(n + 1) &&
-                    levels.get(n) - levels.get(n + 1) <= 3);
+        boolean levelsDescendSafely = IntStream.range(0, levels.size() - 1)
+                .allMatch(n -> levelDescendsSafely(levels, n));
 
-        boolean ascending = IntStream.range(0, levels.size() - 1)
-                .allMatch(n -> levels.get(n) < levels.get(n + 1) &&
-                    levels.get(n + 1) - levels.get(n) <= 3);
+        boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
+                .allMatch(n -> levelAscendsSafely(levels, n));
 
-        return descending || ascending;
+        return levelAscendsSafely || levelsDescendSafely;
+    }
+
+    boolean levelAscendsSafely(List<Integer> levels, int n) {
+        int diff = levels.get(n + 1) - levels.get(n);
+        return withinAllowedTolerance(diff);
+    }
+
+    boolean levelDescendsSafely(List<Integer> levels, int n) {
+        int diff = levels.get(n) - levels.get(n + 1);
+        return withinAllowedTolerance(diff);
+    }
+
+    private boolean withinAllowedTolerance(int diff) {
+        return diff > 0 && diff <= LEVEL_TOLERANCE;
     }
 }
