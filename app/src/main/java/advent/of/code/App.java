@@ -9,6 +9,7 @@ public class App {
         solve(new Day1a());
         solve(new Day1b());
         solve(new Day2a());
+        solve(new Day2b());
     }
 
     public static void solve(Solution solution) throws Exception {

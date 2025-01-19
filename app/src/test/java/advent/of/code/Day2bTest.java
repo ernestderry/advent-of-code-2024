@@ -32,29 +32,31 @@ public class Day2bTest {
     }
 
     @Test
-    public void rowNotAllAscendingDescendingLevelsIsNotSafe() {
-        assertEquals("0", day2b.solve(List.of("1 3 2 4 5")));
+    public void rowNotAllAscendingLevelsIsNotSafe() {
+        assertEquals("1", day2b.solve(List.of("1 3 2 4 5")));
     }
 
     @Test
-    public void rowWithOnlyOneUnSafeDescendingLevelIsSafe() {
+    public void rowDescendingWithUnsafeLevelRemovedIsSafe() {
         assertEquals("1", day2b.solve(List.of("8 6 4 4 1")));
     }
 
-    public void rowWithOnlyOneUnSafeAscendingLevelIsSafe() {
-        assertEquals("1", day2b.solve(List.of("1 2 7 8 9")));
+    @Test
+    public void rowAscendingUnsafeRegardlessWhichLevelIsRemoved() {
+        assertEquals("0", day2b.solve(List.of("1 2 7 8 9")));
     }
 
     @Test
-    public void rowWhereDescendingAdjacentLevelsDifferByMoreThan3IsNotSafe() {
+    public void rowDescendingUnsafeRegardlessWhichLevelIsRemoved() {
         assertEquals("0", day2b.solve(List.of("9 7 6 2 1")));
     }
 
+    @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2_example.txt"); 
-        assertEquals("2", day2b.solve(puzzleInput));
+        assertEquals("4", day2b.solve(puzzleInput));
     }
-
+    
     public void actualPuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2.txt"); 
         assertEquals("", day2b.solve(puzzleInput));

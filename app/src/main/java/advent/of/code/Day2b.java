@@ -35,15 +35,33 @@ public class Day2b extends Solution {
         }
         levelsDescendSafely = !firstFailingLevel.isPresent();
 
-        boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
-                .allMatch(n -> levelAscendsSafely(levels, n));
+        levels = Arrays.stream(report.split("\\s"))
+            .map(n -> Integer.parseInt(n))
+            .collect(Collectors.toList());
 
-        return levelAscendsSafely || levelsDescendSafely;
+        boolean levelsAscendSafely;
+        firstFailingLevel = findFirstFailingAscendingLevel(levels);
+        if (firstFailingLevel.isPresent()) {
+            levels.remove(firstFailingLevel.getAsInt());
+            firstFailingLevel = findFirstFailingAscendingLevel(levels);
+        }
+        levelsAscendSafely = !firstFailingLevel.isPresent();
+
+        // boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
+        //         .allMatch(n -> levelAscendsSafely(levels, n));
+
+        return levelsAscendSafely || levelsDescendSafely;
     }
 
     private OptionalInt findFirstFailingDescendingLevel(List<Integer> levels) {
         return IntStream.range(0, levels.size() - 1)
                 .filter(n -> !levelDescendsSafely(levels, n))
+                .findFirst();
+    }
+
+    private OptionalInt findFirstFailingAscendingLevel(List<Integer> levels) {
+        return IntStream.range(0, levels.size() - 1)
+                .filter(n -> !levelAscendsSafely(levels, n))
                 .findFirst();
     }
 
