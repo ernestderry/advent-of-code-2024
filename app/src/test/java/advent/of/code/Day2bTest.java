@@ -52,11 +52,31 @@ public class Day2bTest {
     }
 
     @Test
+    public void rowAscendingWithLastLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("9 8 7 6 99")));
+    }
+
+    @Test
+    public void rowDescendingWithLastLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("1 2 3 4 1")));
+    }
+
+    @Test
+    public void rowAscendingWithFirstLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("99 2 3 4 5")));
+    }
+
+    @Test
+    public void rowDescendingWithFirstLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("99 4 3 2 1")));
+    }
+
+    @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2_example.txt"); 
         assertEquals("4", day2b.solve(puzzleInput));
     }
-    
+
     public void actualPuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2.txt"); 
         assertEquals("", day2b.solve(puzzleInput));
