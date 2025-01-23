@@ -31,10 +31,10 @@ public class Day2b extends Solution {
             .map(n -> Integer.parseInt(n))
             .collect(Collectors.toList());
   
-        boolean levelsDescendSafely = IntStream.range(1, levels.size())
+        boolean levelsDescendSafely = IntStream.range(0, levels.size() - 1)
             .allMatch(n -> levelDescendsSafely(levels, n));
 
-        boolean levelAscendsSafely = IntStream.range(1, levels.size())
+        boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
             .allMatch(n -> levelAscendsSafely(levels, n));
 
         reportIsSafe = levelAscendsSafely || levelsDescendSafely;
@@ -46,10 +46,10 @@ public class Day2b extends Solution {
                     .collect(Collectors.toList());
                 modifiedLevels.remove(m);
 
-                levelsDescendSafely = IntStream.range(1, modifiedLevels.size())
+                levelsDescendSafely = IntStream.range(0, modifiedLevels.size() - 1)
                     .allMatch(n -> levelDescendsSafely(modifiedLevels, n));
     
-                levelAscendsSafely = IntStream.range(1, modifiedLevels.size())
+                levelAscendsSafely = IntStream.range(0, modifiedLevels.size() - 1)
                     .allMatch(n -> levelAscendsSafely(modifiedLevels, n));
     
                 reportIsSafe = levelAscendsSafely || levelsDescendSafely;
@@ -60,12 +60,12 @@ public class Day2b extends Solution {
     }
 
     boolean levelAscendsSafely(List<Integer> levels, int n) {
-        int diff = levels.get(n) - levels.get(n - 1);
+        int diff = levels.get(n + 1) - levels.get(n);
         return withinAllowedTolerance(diff);
     }
 
     boolean levelDescendsSafely(List<Integer> levels, int n) {
-        int diff = levels.get(n - 1) - levels.get(n);
+        int diff = levels.get(n) - levels.get(n + 1);
         return withinAllowedTolerance(diff);
     }
 
