@@ -87,9 +87,10 @@ public class Day2bTest {
         assertEquals("4", day2b.solve(puzzleInput));
     }
 
+    @Test
     public void actualPuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2.txt"); 
-        assertEquals("", day2b.solve(puzzleInput));
+        assertEquals("366", day2b.solve(puzzleInput));
     }
 
     private List<String> readPuzzleInputFromFile(String filename) throws FileNotFoundException, IOException {

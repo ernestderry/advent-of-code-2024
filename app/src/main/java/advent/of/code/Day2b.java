@@ -18,83 +18,45 @@ public class Day2b extends Solution {
     String solve(List<String> puzzleInput) {
 
         return Long.toString(puzzleInput.stream()
-            .filter(report -> isReportSafe(report))
+            .filter(report -> isReportSafe2(report))
             .collect(Collectors.counting()));
+
     }
 
-    private boolean isReportSafe(String report) {
+    private boolean isReportSafe2(String report) {
+        
+        boolean reportIsSafe;
+        
         List<Integer> levels = Arrays.stream(report.split("\\s"))
-                .map(n -> Integer.parseInt(n))
-                .collect(Collectors.toList());
-
-        boolean levelsDescendSafely = true;
-        OptionalInt secondFailingLevel;
-
-        OptionalInt firstFailingLevel = findFirstFailingDescendingLevel(levels);
-        if (firstFailingLevel.isPresent()) {
-            levels.remove(firstFailingLevel.getAsInt());
-            secondFailingLevel = findFirstFailingDescendingLevel(levels);
-            if (secondFailingLevel.isPresent()) {
-                
-                if (secondFailingLevel.getAsInt() == 1) {
-
-                    levels = Arrays.stream(report.split("\\s"))
-                    .map(n -> Integer.parseInt(n))
-                    .collect(Collectors.toList());
-
-                    levels.remove(0);
-                    secondFailingLevel = findFirstFailingDescendingLevel(levels);
-                    if (secondFailingLevel.isPresent()) {
-                        levelsDescendSafely = false;
-                    }
-                } else {
-                    levelsDescendSafely = false;
-                }        
-            }
-        }
-
-        levels = Arrays.stream(report.split("\\s"))
             .map(n -> Integer.parseInt(n))
             .collect(Collectors.toList());
+  
+        boolean levelsDescendSafely = IntStream.range(1, levels.size())
+            .allMatch(n -> levelDescendsSafely(levels, n));
 
-        boolean levelsAscendSafely = true;
-        firstFailingLevel = findFirstFailingAscendingLevel(levels);
-        if (firstFailingLevel.isPresent()) {
-            levels.remove(firstFailingLevel.getAsInt());
-            secondFailingLevel = findFirstFailingAscendingLevel(levels);
-            if (secondFailingLevel.isPresent()) {
-                
-                if (secondFailingLevel.getAsInt() == 1) {
+        boolean levelAscendsSafely = IntStream.range(1, levels.size())
+            .allMatch(n -> levelAscendsSafely(levels, n));
 
-                    levels = Arrays.stream(report.split("\\s"))
+        reportIsSafe = levelAscendsSafely || levelsDescendSafely;
+
+        if (!reportIsSafe) {
+            for (int m = 0; m < levels.size() && !reportIsSafe; m++) {
+                List<Integer> modifiedLevels = Arrays.stream(report.split("\\s"))
                     .map(n -> Integer.parseInt(n))
                     .collect(Collectors.toList());
+                modifiedLevels.remove(m);
 
-                    levels.remove(0);
-                    secondFailingLevel = findFirstFailingAscendingLevel(levels);
-                    if (secondFailingLevel.isPresent()) {
-                        levelsAscendSafely = false;
-                    }
-                } else {
-                    levelsAscendSafely = false;
-                }        
+                levelsDescendSafely = IntStream.range(1, modifiedLevels.size())
+                    .allMatch(n -> levelDescendsSafely(modifiedLevels, n));
+    
+                levelAscendsSafely = IntStream.range(1, modifiedLevels.size())
+                    .allMatch(n -> levelAscendsSafely(modifiedLevels, n));
+    
+                reportIsSafe = levelAscendsSafely || levelsDescendSafely;
             }
         }
-        
-        
-        return levelsAscendSafely || levelsDescendSafely;
-    }
 
-    private OptionalInt findFirstFailingDescendingLevel(List<Integer> levels) {
-        return IntStream.range(1, levels.size())
-                .filter(n -> !levelDescendsSafely(levels, n))
-                .findFirst();
-    }
-
-    private OptionalInt findFirstFailingAscendingLevel(List<Integer> levels) {
-        return IntStream.range(1, levels.size())
-                .filter(n -> !levelAscendsSafely(levels, n))
-                .findFirst();
+        return reportIsSafe;
     }
 
     boolean levelAscendsSafely(List<Integer> levels, int n) {
