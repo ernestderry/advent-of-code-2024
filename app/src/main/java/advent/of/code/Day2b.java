@@ -1,8 +1,8 @@
 package advent.of.code;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,45 +18,36 @@ public class Day2b extends Solution {
     String solve(List<String> puzzleInput) {
 
         return Long.toString(puzzleInput.stream()
-            .filter(report -> isReportSafe2(report))
+            .filter(report -> isReportSafe(report))
             .collect(Collectors.counting()));
-
     }
 
-    private boolean isReportSafe2(String report) {
+    private boolean isReportSafe(String report) {
         
-        boolean reportIsSafe;
-        
-        List<Integer> levels = Arrays.stream(report.split("\\s"))
+        List<Integer> allLevels = Arrays.stream(report.split("\\s"))
             .map(n -> Integer.parseInt(n))
-            .collect(Collectors.toList());
+            .toList();
   
+        if (getLevelsAreSafe(allLevels)) {
+            return true;
+        };
+
+        return IntStream.range(0, allLevels.size())
+            .anyMatch(levelIndex -> {
+                List<Integer> modifiedLevels = new ArrayList<>(allLevels);
+                modifiedLevels.remove(levelIndex);
+                return getLevelsAreSafe(modifiedLevels);          
+            });
+    }
+
+    private boolean getLevelsAreSafe(List<Integer> levels) {
         boolean levelsDescendSafely = IntStream.range(0, levels.size() - 1)
             .allMatch(n -> levelDescendsSafely(levels, n));
 
         boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
             .allMatch(n -> levelAscendsSafely(levels, n));
 
-        reportIsSafe = levelAscendsSafely || levelsDescendSafely;
-
-        if (!reportIsSafe) {
-            for (int m = 0; m < levels.size() && !reportIsSafe; m++) {
-                List<Integer> modifiedLevels = Arrays.stream(report.split("\\s"))
-                    .map(n -> Integer.parseInt(n))
-                    .collect(Collectors.toList());
-                modifiedLevels.remove(m);
-
-                levelsDescendSafely = IntStream.range(0, modifiedLevels.size() - 1)
-                    .allMatch(n -> levelDescendsSafely(modifiedLevels, n));
-    
-                levelAscendsSafely = IntStream.range(0, modifiedLevels.size() - 1)
-                    .allMatch(n -> levelAscendsSafely(modifiedLevels, n));
-    
-                reportIsSafe = levelAscendsSafely || levelsDescendSafely;
-            }
-        }
-
-        return reportIsSafe;
+        return levelAscendsSafely || levelsDescendSafely;
     }
 
     boolean levelAscendsSafely(List<Integer> levels, int n) {
