@@ -72,6 +72,16 @@ public class Day2bTest {
     }
 
     @Test
+    public void rowAscendingWithMiddleLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("1 2 99 4 5")));
+    }
+
+    @Test
+    public void rowDescendingWithMiddleLevelRemovedIsSafe() {
+        assertEquals("1", day2b.solve(List.of("5 4 99 2 1")));
+    }
+
+    @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("day2_example.txt"); 
         assertEquals("4", day2b.solve(puzzleInput));

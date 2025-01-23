@@ -33,17 +33,16 @@ public class Day2b extends Solution {
         OptionalInt firstFailingLevel = findFirstFailingDescendingLevel(levels);
         if (firstFailingLevel.isPresent()) {
             levels.remove(firstFailingLevel.getAsInt());
-            // firstFailingLevel = findFirstFailingDescendingLevel(levels);
             secondFailingLevel = findFirstFailingDescendingLevel(levels);
             if (secondFailingLevel.isPresent()) {
                 
-                if (secondFailingLevel.getAsInt() == levels.size()- 2) {
+                if (secondFailingLevel.getAsInt() == 1) {
 
                     levels = Arrays.stream(report.split("\\s"))
                     .map(n -> Integer.parseInt(n))
                     .collect(Collectors.toList());
 
-                    levels.remove(levels.size() - 1);
+                    levels.remove(0);
                     secondFailingLevel = findFirstFailingDescendingLevel(levels);
                     if (secondFailingLevel.isPresent()) {
                         levelsDescendSafely = false;
@@ -53,27 +52,25 @@ public class Day2b extends Solution {
                 }        
             }
         }
-        // levelsDescendSafely = !firstFailingLevel.isPresent();
 
         levels = Arrays.stream(report.split("\\s"))
             .map(n -> Integer.parseInt(n))
             .collect(Collectors.toList());
 
         boolean levelsAscendSafely = true;
-        // OptionalInt secondFailingLevel;
         firstFailingLevel = findFirstFailingAscendingLevel(levels);
         if (firstFailingLevel.isPresent()) {
             levels.remove(firstFailingLevel.getAsInt());
             secondFailingLevel = findFirstFailingAscendingLevel(levels);
             if (secondFailingLevel.isPresent()) {
                 
-                if (secondFailingLevel.getAsInt() == levels.size()- 2) {
+                if (secondFailingLevel.getAsInt() == 1) {
 
                     levels = Arrays.stream(report.split("\\s"))
                     .map(n -> Integer.parseInt(n))
                     .collect(Collectors.toList());
 
-                    levels.remove(levels.size() - 1);
+                    levels.remove(0);
                     secondFailingLevel = findFirstFailingAscendingLevel(levels);
                     if (secondFailingLevel.isPresent()) {
                         levelsAscendSafely = false;
@@ -89,24 +86,24 @@ public class Day2b extends Solution {
     }
 
     private OptionalInt findFirstFailingDescendingLevel(List<Integer> levels) {
-        return IntStream.range(0, levels.size() - 1)
+        return IntStream.range(1, levels.size())
                 .filter(n -> !levelDescendsSafely(levels, n))
                 .findFirst();
     }
 
     private OptionalInt findFirstFailingAscendingLevel(List<Integer> levels) {
-        return IntStream.range(0, levels.size() - 1)
+        return IntStream.range(1, levels.size())
                 .filter(n -> !levelAscendsSafely(levels, n))
                 .findFirst();
     }
 
     boolean levelAscendsSafely(List<Integer> levels, int n) {
-        int diff = levels.get(n + 1) - levels.get(n);
+        int diff = levels.get(n) - levels.get(n - 1);
         return withinAllowedTolerance(diff);
     }
 
     boolean levelDescendsSafely(List<Integer> levels, int n) {
-        int diff = levels.get(n) - levels.get(n + 1);
+        int diff = levels.get(n - 1) - levels.get(n);
         return withinAllowedTolerance(diff);
     }
 
