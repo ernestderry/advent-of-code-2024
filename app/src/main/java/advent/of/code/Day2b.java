@@ -17,35 +17,32 @@ public class Day2b extends Solution {
 
     String solve(List<String> puzzleInput) {
 
-        return Long.toString(puzzleInput.stream()
-            .filter(report -> isReportSafe(report))
-            .collect(Collectors.counting()));
+        return Long.toString(puzzleInput.stream().filter(report -> isReportSafe(report))
+                .collect(Collectors.counting()));
     }
 
     private boolean isReportSafe(String report) {
-        
-        List<Integer> allLevels = Arrays.stream(report.split("\\s"))
-            .map(n -> Integer.parseInt(n))
-            .toList();
-  
+
+        List<Integer> allLevels =
+                Arrays.stream(report.split("\\s")).map(n -> Integer.parseInt(n)).toList();
+
         if (getLevelsAreSafe(allLevels)) {
             return true;
-        };
+        } ;
 
-        return IntStream.range(0, allLevels.size())
-            .anyMatch(levelIndex -> {
-                List<Integer> modifiedLevels = new ArrayList<>(allLevels);
-                modifiedLevels.remove(levelIndex);
-                return getLevelsAreSafe(modifiedLevels);          
-            });
+        return IntStream.range(0, allLevels.size()).anyMatch(levelIndex -> {
+            List<Integer> modifiedLevels = new ArrayList<>(allLevels);
+            modifiedLevels.remove(levelIndex);
+            return getLevelsAreSafe(modifiedLevels);
+        });
     }
 
     private boolean getLevelsAreSafe(List<Integer> levels) {
-        boolean levelsDescendSafely = IntStream.range(0, levels.size() - 1)
-            .allMatch(n -> levelDescendsSafely(levels, n));
+        boolean levelsDescendSafely =
+                IntStream.range(0, levels.size() - 1).allMatch(n -> levelDescendsSafely(levels, n));
 
-        boolean levelAscendsSafely = IntStream.range(0, levels.size() - 1)
-            .allMatch(n -> levelAscendsSafely(levels, n));
+        boolean levelAscendsSafely =
+                IntStream.range(0, levels.size() - 1).allMatch(n -> levelAscendsSafely(levels, n));
 
         return levelAscendsSafely || levelsDescendSafely;
     }

@@ -12,13 +12,27 @@ public class Day3a extends Solution {
     }
 
     String solve(List<String> puzzleInput) {
+        // return solveWithLoops(puzzleInput);
+        return solveWithStreams(puzzleInput);
+    }
 
+    String solveWithStreams(List<String> puzzleInput) {
+        
+        Pattern pattern = Pattern.compile("mul\\((\\d+),(\\d+)\\)");
+        
+        return Long.toString(puzzleInput.stream()
+            .flatMap(line -> pattern.matcher(line).results())
+            .map(r -> Integer.parseInt(r.group(1)) * Integer.parseInt(r.group(2)))
+            .reduce(0, Integer::sum));
+    }
+
+
+    String solveWithLoops(List<String> puzzleInput) {
         
         long total = 0;
         Pattern pattern = Pattern.compile("mul\\((\\d+),(\\d+)\\)");
-        
+
         for (String line : puzzleInput) {
-            
             Matcher matcher = pattern.matcher(line);
         
             while (matcher.find()) {
