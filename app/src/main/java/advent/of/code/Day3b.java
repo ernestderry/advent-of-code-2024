@@ -12,11 +12,6 @@ public class Day3b extends Solution {
     }
 
     String solve(List<String> puzzleInput) {
-        return solveWithLoops(puzzleInput);
-    }
-
-    String solveWithLoops(List<String> puzzleInput) {
-        
         long total = 0;
         boolean multiplicationEnabled = true;
         Pattern pattern = Pattern.compile("mul\\((\\d+),(\\d+)\\)|do\\(\\)|don\'t\\(\\)");
