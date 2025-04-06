@@ -21,11 +21,13 @@ public class Day4a extends Solution {
 
         for (int row = 0; row < noRows; row++) {
             for (int col = 0; col < noColumns; col++) {
+                if (col + 4 <= noColumns) {
                 if (wordSearch[row][col] == 'X') {
-                    if (wordSearch[row][col + 1] == 'M') {
-                        if (wordSearch[row][col + 2] == 'A') {
-                            if (wordSearch[row][col + 3] == 'S') {
-                                found += 1;
+                        if (wordSearch[row][col + 1] == 'M') {
+                            if (wordSearch[row][col + 2] == 'A') {
+                                if (wordSearch[row][col + 3] == 'S') {
+                                    found += 1;
+                                }
                             }
                         }
                     }

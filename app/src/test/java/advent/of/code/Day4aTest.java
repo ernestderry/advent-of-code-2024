@@ -25,8 +25,14 @@ public class Day4aTest {
     public void horizontalXmas() {
         List<String> puzzleInput = List.of(
             "..XMAS",
-            "XMAS..",
+            "...XMA",
+            "....XM",
+            ".....X",
             "......",
+            "S.....",
+            "AS....",
+            "MAS...",
+            "XMAS..",
             ".XMAS."    
         );
         assertEquals("3", day4a.solve(puzzleInput));
