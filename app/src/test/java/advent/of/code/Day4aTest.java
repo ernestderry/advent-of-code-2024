@@ -38,6 +38,23 @@ public class Day4aTest {
         assertEquals("3", day4a.solve(puzzleInput));
     }
 
+    @Test
+    public void horizontalReverseXmas() {
+        List<String> puzzleInput = List.of(
+            "..SAMX",
+            "...SAM",
+            "....SA",
+            ".....S",
+            "......",
+            "X.....",
+            "MX....",
+            "AMX...",
+            "SAMX..",
+            ".SAMX."    
+        );
+        assertEquals("3", day4a.solve(puzzleInput));
+    }
+
     // @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("dayX_example.txt"); 
