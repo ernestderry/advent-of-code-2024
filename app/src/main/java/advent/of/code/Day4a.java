@@ -24,7 +24,13 @@ public class Day4a extends Solution {
                 if (horizontalMatch(wordSearch, row, col, noColumns)) {
                     found += 1;
                 }
+                if (horizontalReverseMatch(wordSearch, row, col, noColumns)) {
+                    found += 1;
+                }
                 if (verticalMatch(wordSearch, row, col, noRows)) {
+                    found += 1;
+                }
+                if (verticalReverseMatch(wordSearch, row, col, noRows)) {
                     found += 1;
                 }
             }
@@ -45,6 +51,11 @@ public class Day4a extends Solution {
                 }
             }
         }
+
+        return false;
+    }
+
+    private boolean horizontalReverseMatch(char[][] wordSearch, int row, int col, int noColumns) {
         if (col >= 3) {
             if (wordSearch[row][col] == 'X') {
                 if (wordSearch[row][col - 1] == 'M') {
@@ -72,6 +83,11 @@ public class Day4a extends Solution {
                 }
             }
         }
+        
+        return false;
+    }
+
+    private boolean verticalReverseMatch(char[][] wordSearch, int row, int col, int noRows) {
         if (row >= 3) {
             if (wordSearch[row][col] == 'X') {
                 if (wordSearch[row - 1][col] == 'M') {
@@ -86,5 +102,4 @@ public class Day4a extends Solution {
         
         return false;
     }
-
 }

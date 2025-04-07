@@ -84,6 +84,21 @@ public class Day4aTest {
         assertEquals("3", day4a.solve(puzzleInput));
     }
 
+    @Test
+    public void allWaysFromOnePoint() {
+        List<String> puzzleInput = List.of(
+            "...S...",
+            "...A...",
+            "...M...",    
+            "SAMXMAS",
+            "...M...",
+            "...A...",
+            "...S..."            
+        );
+        assertEquals("4", day4a.solve(puzzleInput));
+    }
+
+
     // @Test
     public void examplePuzzleInput() throws IOException {
         List<String> puzzleInput = readPuzzleInputFromFile("dayX_example.txt"); 
