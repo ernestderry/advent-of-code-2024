@@ -25,12 +25,14 @@ public class Day4aTest {
     public void horizontalXmas() {
         List<String> puzzleInput = List.of(
             "..XMAS",
+            "......",
             "...XMA",
             "....XM",
             ".....X",
             "......",
             "S.....",
             "AS....",
+            "......",
             "MAS...",
             "XMAS..",
             ".XMAS."    
@@ -42,15 +44,42 @@ public class Day4aTest {
     public void horizontalReverseXmas() {
         List<String> puzzleInput = List.of(
             "..SAMX",
+            "......",
             "...SAM",
             "....SA",
             ".....S",
-            "......",
             "X.....",
             "MX....",
+            "......",
             "AMX...",
             "SAMX..",
             ".SAMX."    
+        );
+        assertEquals("3", day4a.solve(puzzleInput));
+    }
+
+    @Test
+    public void veriticalXmas() {
+        List<String> puzzleInput = List.of(
+            "MAS....X",
+            "AS....XM",
+            "S...X.MA",
+            "..X.M.AS",
+            ".XM.A.S.",
+            "XMA.S..."
+        );
+        assertEquals("3", day4a.solve(puzzleInput));
+    }
+
+    @Test
+    public void veriticalReverseXmas() {
+        List<String> puzzleInput = List.of(
+            "AMX....S",
+            "MX....SA",
+            "X...S.AM",
+            "..S.A.MX",
+            ".SA.M.X.",
+            "SAM.X..."
         );
         assertEquals("3", day4a.solve(puzzleInput));
     }

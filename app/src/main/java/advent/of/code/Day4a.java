@@ -24,6 +24,9 @@ public class Day4a extends Solution {
                 if (horizontalMatch(wordSearch, row, col, noColumns)) {
                     found += 1;
                 }
+                if (verticalMatch(wordSearch, row, col, noRows)) {
+                    found += 1;
+                }
             }
         }
 
@@ -47,6 +50,33 @@ public class Day4a extends Solution {
                 if (wordSearch[row][col - 1] == 'M') {
                     if (wordSearch[row][col - 2] == 'A') {
                         if (wordSearch[row][col - 3] == 'S') {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    private boolean verticalMatch(char[][] wordSearch, int row, int col, int noRows) {
+        if (row + 4 <= noRows) {
+            if (wordSearch[row][col] == 'X') {
+                if (wordSearch[row + 1][col] == 'M') {
+                    if (wordSearch[row + 2][col] == 'A') {
+                        if (wordSearch[row + 3][col] == 'S') {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (row >= 3) {
+            if (wordSearch[row][col] == 'X') {
+                if (wordSearch[row - 1][col] == 'M') {
+                    if (wordSearch[row - 2][col] == 'A') {
+                        if (wordSearch[row - 3][col] == 'S') {
                             return true;
                         }
                     }
